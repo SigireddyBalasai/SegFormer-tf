@@ -51,7 +51,7 @@ def SegFormer_B0(input_shape, num_classes):
     )(x)
 
     x = ResizeLayer(input_shape[0], input_shape[1])(x)
-    x = tf.nn.softmax(x)
+    x = tf.nn.softmax(x,name="output")
     return tf.keras.Model(inputs=pixel_values, outputs=x)
 
 
@@ -68,7 +68,7 @@ def SegFormer_B1(input_shape, num_classes):
     )(x)
 
     x = ResizeLayer(input_shape[0], input_shape[1])(x)
-    x = tf.nn.softmax(x)
+    x = tf.nn.softmax(x,name="output")
     return tf.keras.Model(inputs=pixel_values, outputs=x)
 
 
@@ -85,7 +85,7 @@ def SegFormer_B2(input_shape, num_classes):
     )(x)
 
     x = ResizeLayer(input_shape[0], input_shape[1])(x)
-    x = tf.nn.softmax(x)
+    x = tf.nn.softmax(x,name="output")
     return tf.keras.Model(inputs=pixel_values, outputs=x)
 
 
@@ -102,7 +102,7 @@ def SegFormer_B3(input_shape, num_classes):
     )(x)
 
     x = ResizeLayer(input_shape[0], input_shape[1])(x)
-    x = tf.nn.softmax(x)
+    x = tf.nn.softmax(x,name="output")
     return tf.keras.Model(inputs=pixel_values, outputs=x)
 
 
@@ -119,7 +119,7 @@ def SegFormer_B4(input_shape, num_classes):
     )(x)
 
     x = ResizeLayer(input_shape[0], input_shape[1])(x)
-    x = tf.nn.softmax(x)
+    x = tf.nn.softmax(x,name="output")
     return tf.keras.Model(inputs=pixel_values, outputs=x)
 
 
@@ -136,5 +136,5 @@ def SegFormer_B5(input_shape, num_classes):
     )(x)
 
     x = ResizeLayer(input_shape[0], input_shape[1])(x)
-    x = tf.nn.softmax(x)
+    x = tf.nn.softmax(x,name="output")
     return tf.keras.Model(inputs=pixel_values, outputs=x)
