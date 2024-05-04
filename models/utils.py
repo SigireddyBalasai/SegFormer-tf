@@ -21,6 +21,7 @@ class DropPath(tf.keras.layers.Layer):
         self.drop_path = drop_path
 
     def call(self, x, training=None):
+        print(tf.shape(x))
         if training:
             keep_prob = 1 - self.drop_path
             shape = tf.shape(x)[0], *tf.ones_like(tf.shape(x)[1:])
