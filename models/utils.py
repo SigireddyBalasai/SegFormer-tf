@@ -16,12 +16,14 @@ class ResizeLayer(tf.keras.layers.Layer):
 
 
 class DropPath(tf.keras.layers.Layer):
+    """DropPath layer for regularization during training."""
     def __init__(self, drop_path, **kwargs):
         super().__init__(**kwargs)
         self.drop_path = drop_path
 
     def call(self, x, training=None):
-        print(tf.shape(x))
+        """Apply drop path regularization to the input tensor."""
+        print(tf.shape(x), tf.ones_like(tf.shape(x)[1:]))
         if training:
             keep_prob = 1 - self.drop_path
             shape = tf.shape(x)[0], *tf.ones_like(tf.shape(x)[1:])
