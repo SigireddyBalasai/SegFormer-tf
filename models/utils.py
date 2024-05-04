@@ -20,7 +20,7 @@ class DropPath(tf.keras.layers.Layer):
     def __init__(self, drop_path, **kwargs):
         super().__init__(**kwargs)
         self.drop_path = drop_path
-
+    @tf.function
     def call(self, x, training=None):
         """Apply drop path regularization to the input tensor."""
         print(tf.shape(x), tf.ones_like(tf.shape(x)[1:]))
