@@ -1,7 +1,6 @@
 import tensorflow as tf
 from tensorflow.keras import layers
 from .Attention import Attention
-from .utils import DropPath
 
 class DWConv(layers.Layer):
     def __init__(self, filters=768, **kwargs):
@@ -74,7 +73,6 @@ class Block(layers.Layer):
             attn_drop=attn_drop,
             proj_drop=drop,
         )
-        self.drop_path = DropPath(drop_path)
         self.norm2 = layers.LayerNormalization(epsilon=1e-05)
         mlp_hidden_dim = int(dim * mlp_ratio)
         self.mlp = Mlp(
@@ -87,14 +85,12 @@ class Block(layers.Layer):
         # Apply LayerNormalization and Attention layer
         attn_output_norm = self.norm1(x)
         attn_output = self.attn(attn_output_norm, H=H, W=W)
-        attn_output_with_drop = self.drop_path(attn_output)
-        x = x + attn_output_with_drop
+        x = x + attn_output
 
         # Apply LayerNormalization and MLP layer
         mlp_output_norm = self.norm2(x)
         mlp_output = self.mlp(mlp_output_norm, H=H, W=W)
-        mlp_output_with_drop = self.drop_path(mlp_output)
-        x = x + mlp_output_with_drop
+        x = x + mlp_output
 
         return x
 
