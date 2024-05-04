@@ -136,5 +136,5 @@ def SegFormer_B5(input_shape, num_classes):
     )(x)
 
     x = ResizeLayer(input_shape[0], input_shape[1])(x)
-    x = tf.nn.softmax(x,name="output")
+    x = tf.keras.activations.softmax(x,name="output")
     return tf.keras.Model(inputs=pixel_values, outputs=x)
