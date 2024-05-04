@@ -17,7 +17,7 @@ class Attention(tf.keras.layers.Layer):
         self.head_dim = self.dim // self.num_heads
 
         self.units = self.num_heads * self.head_dim
-        self.sqrt_of_units = tf.sqrt(self.head_dim)
+        self.sqrt_of_units = tf.sqrt(tf.cast(self.head_dim, dtype=tf.float32))
 
         self.q = tf.keras.layers.Dense(self.units)
         self.k = tf.keras.layers.Dense(self.units)
