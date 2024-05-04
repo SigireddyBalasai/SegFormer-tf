@@ -99,12 +99,13 @@ def SegFormer_B3(input_shape, num_classes):
         embed_dims=MODEL_CONFIGS["mit_b3"]["embed_dims"],
         depths=MODEL_CONFIGS["mit_b3"]["depths"],
     )(pixel_values)
-    x = layers.BatchNormalization()(x)
+    x = [tf.keras.layers.LayerNormalization(axis=-1)(t) for t in x]
     x = SegFormerHead(
         num_classes=num_classes,
         decode_dim=MODEL_CONFIGS["mit_b3"]["decode_dim"],
     )(x)
-    x = tf.keras.layers.LayerNormalization(input_shape=x.shape[1:])(x)
+    
+    #x = tf.keras.layers.LayerNormalization(input_shape=x.shape[1:])(x)
     x = ResizeLayer(input_shape[0], input_shape[1])(x)
     x = tf.keras.activations.softmax(x,)
     return tf.keras.Model(inputs=pixel_values, outputs=x)
