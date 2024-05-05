@@ -1,5 +1,7 @@
 import tensorflow as tf
 
+import tensorflow as tf
+
 class Attention(tf.keras.layers.Layer):
     def __init__(
         self,
@@ -9,6 +11,7 @@ class Attention(tf.keras.layers.Layer):
         qkv_bias=False,
         attn_drop=0.0,
         proj_drop=0.0,
+        activation='leaky_relu',  # Set activation to 'leakyrelu'
         **kwargs,
     ):
         super().__init__(**kwargs)
@@ -19,9 +22,9 @@ class Attention(tf.keras.layers.Layer):
         self.units = self.num_heads * self.head_dim
         self.sqrt_of_units = tf.sqrt(tf.cast(self.head_dim, dtype=tf.float32))
 
-        self.q = tf.keras.layers.Dense(self.units)
-        self.k = tf.keras.layers.Dense(self.units)
-        self.v = tf.keras.layers.Dense(self.units)
+        self.q = tf.keras.layers.Dense(self.units, activation=activation, kernel_initializer='he_normal')  # Modify initialization
+        self.k = tf.keras.layers.Dense(self.units, activation=activation, kernel_initializer='he_normal')  # Modify initialization
+        self.v = tf.keras.layers.Dense(self.units, activation=activation, kernel_initializer='he_normal')  # Modify initialization
 
         self.attn_drop = tf.keras.layers.Dropout(attn_drop)
 
@@ -32,7 +35,7 @@ class Attention(tf.keras.layers.Layer):
             )
             self.norm = tf.keras.layers.LayerNormalization(epsilon=1e-05)
 
-        self.proj = tf.keras.layers.Dense(dim)
+        self.proj = tf.keras.layers.Dense(dim, activation=activation, kernel_initializer='he_normal')  # Modify initialization
         self.proj_drop = tf.keras.layers.Dropout(proj_drop)
 
     def call(
