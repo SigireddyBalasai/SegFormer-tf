@@ -11,7 +11,7 @@ class Attention(tf.keras.layers.Layer):
         qkv_bias=False,
         attn_drop=0.0,
         proj_drop=0.0,
-        activation='leaky_relu',  # Set activation to 'leakyrelu'
+        activation='gelu',  # Set activation to 'leakyrelu'
         **kwargs,
     ):
         super().__init__(**kwargs)

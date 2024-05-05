@@ -35,11 +35,11 @@ class Mlp(layers.Layer):
         super().__init__()
         out_features = out_features or in_features
         hidden_features = hidden_features or in_features
-        self.fc1 = layers.Dense(hidden_features)
+        self.fc1 = layers.Dense(hidden_features,activation='gelu')
         self.dwconv = DWConv(hidden_features)
         self.act = layers.Activation("gelu")
         self.fc2 = layers.Dense(out_features)
-        self.drop = layers.Dropout(drop)
+        self.drop = layers.Dropout(drop,activation='gelu')
 
     def call(self, x, H, W):
         x = self.fc1(x)

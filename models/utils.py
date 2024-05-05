@@ -10,7 +10,7 @@ class ResizeLayer(tf.keras.layers.Layer):
         resized = tf.image.resize(
             inputs,
             size=(self.height, self.width),
-            method=tf.image.ResizeMethod.BILINEAR,
+            method='nearest',
         )
         return resized
 

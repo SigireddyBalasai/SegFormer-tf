@@ -3,7 +3,7 @@ import tensorflow as tf
 class MLP(tf.keras.layers.Layer):
     def __init__(self, decode_dim):
         super(MLP, self).__init__()
-        self.proj = tf.keras.layers.Dense(decode_dim)
+        self.proj = tf.keras.layers.Dense(decode_dim,activation='gelu')
 
     def call(self, x):
         x = self.proj(x)
